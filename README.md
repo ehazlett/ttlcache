@@ -22,7 +22,7 @@ fmt.Println(r.(string))
 # Expiration Callback
 A callback can be specified to be called upon key expiration:
 
-```
+```go
 // error handling omitted for example
 
 func callback(k string, v interface{}) {
