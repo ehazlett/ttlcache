@@ -11,6 +11,9 @@ func (t *TTLCache) Set(key string, val interface{}) error {
 	// update key
 	k.updated = time.Now()
 
+	t.lock.Lock()
+	defer t.lock.Unlock()
+
 	t.data[key] = k
 
 	return nil

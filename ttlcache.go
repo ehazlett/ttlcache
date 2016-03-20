@@ -14,7 +14,7 @@ type Key struct {
 type TTLCache struct {
 	data         map[string]*Key
 	ttl          time.Duration
-	lock         *sync.Mutex
+	lock         *sync.RWMutex
 	reapCallback func(key string, val interface{})
 }
 
@@ -26,7 +26,7 @@ func NewTTLCache(ttl time.Duration) (*TTLCache, error) {
 	c := &TTLCache{
 		data:         map[string]*Key{},
 		ttl:          ttl,
-		lock:         &sync.Mutex{},
+		lock:         &sync.RWMutex{},
 		reapCallback: func(key string, val interface{}) {},
 	}
 

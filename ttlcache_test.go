@@ -1,6 +1,7 @@
 package ttlcache
 
 import (
+	"strconv"
 	"testing"
 	"time"
 )
@@ -116,4 +117,66 @@ func TestSetUpdate(t *testing.T) {
 		t.Fatalf("expected value %s; received %s", nv, r)
 	}
 
+}
+
+type Animal struct {
+	name string
+}
+
+func TestIterator(t *testing.T) {
+	ttl := time.Second * 2000
+
+	c, err := NewTTLCache(ttl)
+	if err != nil {
+		t.Fatal(err)
+	}
+
+	// Insert 100 elements.
+	for i := 0; i < 100; i++ {
+		c.Set(strconv.Itoa(i), Animal{strconv.Itoa(i)})
+	}
+
+	counter := 0
+	// Iterate over elements.
+	for item := range c.Iter() {
+		val := item.Val
+
+		if val == nil {
+			t.Error("Expecting an object.")
+		}
+		counter++
+	}
+
+	if counter != 100 {
+		t.Error("We should have counted 100 elements.")
+	}
+}
+
+func TestBufferedIterator(t *testing.T) {
+	ttl := time.Second * 2000
+
+	c, err := NewTTLCache(ttl)
+	if err != nil {
+		t.Fatal(err)
+	}
+
+	// Insert 100 elements
+	for i := 0; i < 100; i++ {
+		c.Set(strconv.Itoa(i), Animal{strconv.Itoa(i)})
+	}
+
+	counter := 0
+	// Iterate over elements
+	for item := range c.IterBuffered() {
+		val := item.Val
+
+		if val == nil {
+			t.Error("Expecting an object.")
+		}
+		counter++
+	}
+
+	if counter != 100 {
+		t.Error("We should have counted 100 elements.")
+	}
 }
