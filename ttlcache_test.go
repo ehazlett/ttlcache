@@ -1,7 +1,6 @@
 package ttlcache
 
 import (
-	"fmt"
 	"strconv"
 	"testing"
 	"time"
