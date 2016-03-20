@@ -1,9 +1,8 @@
 package ttlcache
 
 import (
-	"time"
-
 	log "github.com/Sirupsen/logrus"
+	"time"
 )
 
 func (t *TTLCache) reap() {
