@@ -3,7 +3,7 @@ package ttlcache
 import (
 	"time"
 
-	log "github.com/Sirupsen/logrus"
+	"github.com/sirupsen/logrus"
 )
 
 func (t *TTLCache) reap() {
@@ -12,7 +12,7 @@ func (t *TTLCache) reap() {
 	for k, v := range t.data {
 		elapsed := time.Since(v.updated)
 		if elapsed >= t.ttl {
-			log.Debugf("reaping key: %s", k)
+			logrus.Debugf("reaping key: %s", k)
 			delete(t.data, k)
 
 			// callback

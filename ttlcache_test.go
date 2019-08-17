@@ -33,7 +33,7 @@ func TestSetGetSimple(t *testing.T) {
 	}
 
 	r := c.Get(k)
-	if r.(string) != v {
+	if r.Value.(string) != v {
 		t.Fatalf("expected value %s; received %s", v, r)
 	}
 }
@@ -61,7 +61,7 @@ func TestSetInvalidate(t *testing.T) {
 	time.Sleep(ttl - 250)
 
 	r := c.Get(k)
-	if r.(string) != v {
+	if r.Value.(string) != v {
 		t.Fatalf("expected value %s; received %s", v, r)
 	}
 
@@ -96,7 +96,7 @@ func TestSetUpdate(t *testing.T) {
 	}
 
 	r := c.Get(k)
-	if r.(string) != v {
+	if r.Value.(string) != v {
 		t.Fatalf("expected value %s; received %s", v, r)
 	}
 
@@ -112,7 +112,7 @@ func TestSetUpdate(t *testing.T) {
 	time.Sleep(time.Millisecond * 1500)
 
 	r = c.Get(k)
-	if r.(string) != nv {
+	if r.Value.(string) != nv {
 		t.Fatalf("expected value %s; received %s", nv, r)
 	}
 

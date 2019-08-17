@@ -16,7 +16,7 @@ v := "testval"
 c.Set(k, v)
 
 r := c.Get(k)
-fmt.Println(r.(string))
+fmt.Println(r.Value.(string))
 ```
 
 # Expiration Callback
