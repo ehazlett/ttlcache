@@ -13,3 +13,15 @@ func (t *TTLCache) Get(key string) *KV {
 
 	return nil
 }
+
+func (t *TTLCache) GetAll() []*KV {
+	keys := []*KV{}
+	for k, v := range t.data {
+		keys = append(keys, &KV{
+			Key:   k,
+			Value: v,
+			TTL:   t.ttl - (time.Since(v.updated)),
+		})
+	}
+	return keys
+}

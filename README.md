@@ -1,8 +1,6 @@
 # TTLCache
 TTLCache is a very simple TTL based in-memory cache written in Go.
 
-[![Build Status](https://travis-ci.org/ehazlett/ttlcache.svg?branch=master)](https://travis-ci.org/ehazlett/ttlcache) [![GoDoc](https://godoc.org/github.com/ehazlett/ttlcache?status.svg)](https://godoc.org/github.com/ehazlett/ttlcache) [![Coverage](https://gocover.io/_badge/github.com/ehazlett/ttlcache)](https://gocover.io/_badge/github.com/ehazlett/ttlcache)
-
 # Usage
 
 ```go
