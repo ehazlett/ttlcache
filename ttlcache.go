@@ -24,7 +24,7 @@ func NewTTLCache(ttl time.Duration) (*TTLCache, error) {
 	}
 
 	c := &TTLCache{
-		data:         map[string]*Key{},
+		data:         make(map[string]*Key{}),
 		ttl:          ttl,
 		lock:         &sync.Mutex{},
 		reapCallback: func(key string, val interface{}) {},
