@@ -19,7 +19,7 @@ func (t *TTLCache) GetAll() []*KV {
 	for k, v := range t.data {
 		keys = append(keys, &KV{
 			Key:   k,
-			Value: v,
+			Value: v.Value,
 			TTL:   t.ttl - (time.Since(v.updated)),
 		})
 	}
