@@ -3,8 +3,8 @@ package ttlcache
 import "time"
 
 func (t *TTLCache) Get(key string) *KV {
-	t.lock.Lock()
-	defer t.lock.Unlock()
+	t.lock.RLock()
+	defer t.lock.RUnlock()
 
 	if k, ok := t.data[key]; ok {
 		return &KV{
@@ -18,8 +18,8 @@ func (t *TTLCache) Get(key string) *KV {
 }
 
 func (t *TTLCache) GetAll() []*KV {
-	t.lock.Lock()
-	defer t.lock.Unlock()
+	t.lock.RLock()
+	defer t.lock.RUnlock()
 
 	keys := []*KV{}
 	for k, v := range t.data {
