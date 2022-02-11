@@ -3,6 +3,9 @@ package ttlcache
 import "time"
 
 func (t *TTLCache) Get(key string) *KV {
+	t.lock.Lock()
+	defer t.lock.Unlock()
+
 	if k, ok := t.data[key]; ok {
 		return &KV{
 			Key:   key,
@@ -15,6 +18,9 @@ func (t *TTLCache) Get(key string) *KV {
 }
 
 func (t *TTLCache) GetAll() []*KV {
+	t.lock.Lock()
+	defer t.lock.Unlock()
+
 	keys := []*KV{}
 	for k, v := range t.data {
 		keys = append(keys, &KV{
